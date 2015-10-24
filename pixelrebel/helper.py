@@ -1,4 +1,4 @@
-import datetime
+import datetime, re
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
