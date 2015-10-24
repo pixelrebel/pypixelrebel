@@ -1,3 +1,4 @@
+import datetime
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -20,9 +21,7 @@ Return number as string with commas
 '''
 def commas(x):
     if type(x) not in [type(0), type(0L)]:
-        #raise TypeError("Parameter must be an integer.")
-        # Don't Raise Error, instead just pass string through
-        return str(x)
+        raise TypeError("Parameter must be an integer.")
     if x < 0:
         return '-' + commas(-x)
     result = ''
