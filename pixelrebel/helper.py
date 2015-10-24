@@ -1,4 +1,4 @@
-import datetime, re
+import datetime, re, os
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -33,7 +33,7 @@ def commas(x):
 '''
 Format bytes into human readable numbers
 '''
-def sizeof_fmt(num, suffix='B'):
+def bytesfmt(num, suffix='B'):
     for unit in ['','Ki','Mi','Gi','Ti','Pi','Ei','Zi']:
             if abs(num) < 1024.0:
                     return "%3.1f %s%s" % (num, unit, suffix)
@@ -43,15 +43,17 @@ def sizeof_fmt(num, suffix='B'):
 '''
 Sends email using sendmail
 '''
-def send_mail(send_from, send_to, subject, text, files=None, server="127.0.0.1"):
+def sendmail(send_from, send_to, subject, body, files=None, server="127.0.0.1"):
     assert isinstance(send_to, list)
+    if files:
+        assert isinstance(files, list)
 
     msg = MIMEMultipart()
     msg['From'] = send_from
     msg['To'] = COMMASPACE.join(send_to)
     msg['Date'] = formatdate(localtime=True)
     msg['Subject'] = subject
-    msg.attach(MIMEText(text))
+    msg.attach(MIMEText(body))
 
     for f in files or []:
         with open(f, "rb") as fil:
