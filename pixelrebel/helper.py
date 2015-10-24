@@ -70,5 +70,4 @@ def sendmail(send_from, send_to, subject, body, files=None, server="127.0.0.1"):
 Return timestamp string for logs
 '''
 def timestamp(fmt='%c'):
-    import datetime
     return datetime.datetime.now().strftime(fmt)
